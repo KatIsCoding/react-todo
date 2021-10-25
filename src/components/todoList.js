@@ -22,25 +22,45 @@ class TodoList extends React.Component {
         },
       ],
     };
+    this.addNewTodo = this.addNewTodo.bind(this);
+    this.deleteTodo = this.deleteTodo.bind(this);
   }
 
   addNewTodo(todoTitle) {
-    this.setState({ todos: [{ id: 2, title: todoTitle, completed: false }] });
-    console.log(todoTitle, this.state);
+    const newTodo = {
+      id: Date.now(),
+      title: todoTitle,
+      completed: false,
+    };
+    this.setState((prevState) => ({
+      todos: [...prevState.todos, newTodo],
+    }));
   }
 
   checkTodo(id) {
-    const { todos } = this.state;
-    console.log(id, todos);
-    this.setState({
-      todos: todos.map((todo) => {
-        const t = todo;
+    // const { todos } = this.state;
+    // console.log(todos);
+    // console.log(id, todos);
+    this.setState((prevState) => ({
+      todos: prevState.todos.map((todo) => {
         if (todo.id === id) {
-          t.completed = !todo.completed;
+          return {
+            ...todo, completed: !todo.completed,
+          };
         }
-        return t;
+        return todo;
       }),
-    });
+    }));
+    console.log(this.state);
+  }
+
+  deleteTodo(id) {
+    console.log(id, this);
+    this.setState((prevState) => ({
+      todos: [
+        ...prevState.todos.filter((todo) => todo.id !== id),
+      ],
+    }));
   }
 
   render() {
@@ -59,7 +79,12 @@ class TodoList extends React.Component {
           <ul className="todoList">
             {
           todos.map((todo) => (
-            <Item key={todo.id} todo={todo} changeEvent={(id) => { this.checkTodo(id); }} />
+            <Item
+              key={todo.id}
+              todo={todo}
+              changeEvent={(id) => { this.checkTodo(id); }}
+              deleteEvent={(id) => { this.deleteTodo(id); }}
+            />
           ))
           }
           </ul>

@@ -9,18 +9,19 @@ class NewTodoForm extends React.Component {
 
   render() {
     const { newTodoEventHandler } = this.props;
+    const { title } = this.state;
     return (
       <form onSubmit={(e) => {
         e.preventDefault();
-        newTodoEventHandler(this.state);
+        if (title.trim()) {
+          e.target[0].value = '';
+          newTodoEventHandler(this.state);
+          this.setState({ title: '' });
+        }
       }}
       >
         <input onKeyUp={(e) => {
-          if (e.key === 'Enter') {
-            e.target.value = '';
-          } else {
-            this.setState({ title: e.target.value });
-          }
+          this.setState({ title: e.target.value });
         }}
         />
         <button type="submit">Submit</button>

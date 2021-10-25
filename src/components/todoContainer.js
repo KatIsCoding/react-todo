@@ -32,6 +32,19 @@ class TodoContainer extends React.Component {
     }));
   }
 
+  editTodo(id, newTitle) {
+    this.setState((prevState) => ({
+      todos: prevState.todos.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo, title: newTitle,
+          };
+        }
+        return todo;
+      }),
+    }));
+  }
+
   checkTodo(id) {
     this.setState((prevState) => ({
       todos: prevState.todos.map((todo) => {
@@ -66,8 +79,9 @@ class TodoContainer extends React.Component {
             <Item
               key={todo.id}
               todo={todo}
-              changeEvent={(id) => { this.checkTodo(id); }}
+              checkEvent={(id) => { this.checkTodo(id); }}
               deleteEvent={(id) => { this.deleteTodo(id); }}
+              editEvent={() => { this.editTodo(); }}
             />
           ))
           }

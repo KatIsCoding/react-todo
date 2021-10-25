@@ -1,6 +1,7 @@
 import './style.css';
 import React from 'react';
 import Item from './todoItem';
+import NewTodoForm from './newItem';
 
 function Header() {
   return (
@@ -26,10 +27,10 @@ class TodoList extends React.Component {
     this.deleteTodo = this.deleteTodo.bind(this);
   }
 
-  addNewTodo(todoTitle) {
+  addNewTodo(todoState) {
     const newTodo = {
       id: Date.now(),
-      title: todoTitle,
+      title: todoState.title,
       completed: false,
     };
     this.setState((prevState) => ({
@@ -69,13 +70,7 @@ class TodoList extends React.Component {
       <div>
         <Header />
         <div>
-          <input onKeyUp={(e) => {
-            if (e.key === 'Enter') {
-              this.addNewTodo(e.target.value);
-              e.target.value = '';
-            }
-          }}
-          />
+          <NewTodoForm newTodoEventHandler={this.addNewTodo} />
           <ul className="todoList">
             {
           todos.map((todo) => (

@@ -10,7 +10,7 @@ function Header() {
   );
 }
 
-class TodoContainer extends React.Component {
+class TodoList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,6 +29,20 @@ class TodoContainer extends React.Component {
     console.log(todoTitle, this.state);
   }
 
+  checkTodo(id) {
+    const { todos } = this.state;
+    console.log(id, todos);
+    this.setState({
+      todos: todos.map((todo) => {
+        const t = todo;
+        if (todo.id === id) {
+          t.completed = !todo.completed;
+        }
+        return t;
+      }),
+    });
+  }
+
   render() {
     const { todos } = this.state;
     return (
@@ -44,7 +58,9 @@ class TodoContainer extends React.Component {
           />
           <ul className="todoList">
             {
-          todos.map((todo) => <Item />)
+          todos.map((todo) => (
+            <Item key={todo.id} todo={todo} changeEvent={(id) => { this.checkTodo(id); }} />
+          ))
           }
           </ul>
         </div>
@@ -53,4 +69,4 @@ class TodoContainer extends React.Component {
   }
 }
 
-export default TodoContainer;
+export default TodoList;

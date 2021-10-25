@@ -1,20 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Item({ completed, changeEvent, title }) {
+function Item(props) {
+  const { todo, changeEvent } = props;
   return (
-    <li>
-      <input type="checkbox" checked={completed} onChange={changeEvent()} />
+    <li key={todo.id}>
+      <input
+        type="checkbox"
+        checked={todo.completed}
+        onChange={() => {
+          changeEvent(todo.id);
+          todo.completed = !todo.completed;
+        }}
+      />
       {' '}
-      {title}
+      {todo.title}
     </li>
   );
 }
 
 Item.propTypes = {
-  completed: PropTypes.bool.isRequired,
+  todo: PropTypes.objectOf,
   changeEvent: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
+};
+
+Item.defaultProps = {
+  todo: {},
 };
 
 export default Item;

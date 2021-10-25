@@ -1,16 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-class Item extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-
-  render(){
-    return(
-      <li>
-      
-      </li>
-    )
-  }
+function Item({ completed, changeEvent, title }) {
+  return (
+    <li>
+      <input type="checkbox" checked={completed} onChange={changeEvent()} />
+      {' '}
+      {title}
+    </li>
+  );
 }
+
+Item.propTypes = {
+  completed: PropTypes.bool.isRequired,
+  changeEvent: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+};
+
+export default Item;

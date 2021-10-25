@@ -1,5 +1,6 @@
 import './style.css';
 import React from 'react';
+import Item from './todoItem';
 
 function Header() {
   return (
@@ -43,7 +44,7 @@ class TodoContainer extends React.Component {
           />
           <ul className="todoList">
             {
-          todos.map((todo) => <li key={todo.id}>{todo.title}</li>)
+          todos.map((todo) => <Item />)
           }
           </ul>
         </div>

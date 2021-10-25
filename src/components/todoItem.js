@@ -10,7 +10,6 @@ function Item(props) {
         checked={todo.completed}
         onChange={() => {
           changeEvent(todo.id);
-          todo.completed = !todo.completed;
         }}
       />
       {' '}

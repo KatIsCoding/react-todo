@@ -46,6 +46,8 @@ function Item(props) {
             if (e.target.value) {
               setstate({ editing: !state.editing });
               editEvent(todo.id, e.target.value);
+            } else {
+              setstate({ editing: !state.editing });
             }
           }
         }}

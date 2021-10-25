@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Item(props) {
-  const { todo, changeEvent } = props;
+  const { todo, changeEvent, deleteEvent } = props;
   return (
     <li key={todo.id}>
       <input
@@ -14,6 +14,7 @@ function Item(props) {
       />
       {' '}
       {todo.title}
+      <button type="button" onClick={() => { deleteEvent(todo.id); }}>Delete</button>
     </li>
   );
 }
@@ -21,6 +22,7 @@ function Item(props) {
 Item.propTypes = {
   todo: PropTypes.objectOf,
   changeEvent: PropTypes.func.isRequired,
+  deleteEvent: PropTypes.func.isRequired,
 };
 
 Item.defaultProps = {

@@ -1,3 +1,44 @@
+.TodoListContainer {
+  display: flex;
+  flex-direction: column;
+}
+
 .header {
-  
+  font-size: 200px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.NewTodoForm input {
+  height: 30px;
+  width: 500px;
+}
+
+.NewTodoForm button {
+  height: 36px;
+}
+
+.todoList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.todoList li {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.todoList li div {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.ContentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
